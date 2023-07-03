@@ -40,9 +40,24 @@
     <main class="container-fluid bg-warning">
       <div class="row">
         <div class="col-3 p-2">
-          <button class="General btn btn-dark">General</button>
-          <button class="newCategory btn btn-dark">New Category</button>
-          <button class="newTask btn btn-dark">New Task</button>
+          <div class="row">
+            <button class="General btn btn-dark col">General</button>
+            <button class="newCategory btn btn-dark col">New Category</button>
+            <button class="newTask btn btn-dark col">New Task</button>
+          </div>
+          <div class="row p-2 bg-dark">
+            <div class="createTask container col-12 p-2">
+              <textarea
+                name="taskContent"
+                id="taskContent"
+                cols="30"
+                rows="10"
+                class="form-control mb-2"
+              >
+              </textarea>
+              <button class="btn btn-light float-end">Add</button>
+            </div>
+          </div>
         </div>
         <div class="col-9 p-2">
           <div class="tasks container">
