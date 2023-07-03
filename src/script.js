@@ -21,6 +21,8 @@ function newTaskElementCreation(content) {
 }
 
 function newTaskWindow() {
+  const HTMLNewTaskButton = document.querySelector(".newTask");
+  HTMLNewTaskButton.onclick = () => {};
   const newTaskButton = document.createElement("div");
 }
 
