@@ -1,8 +1,7 @@
-const data = {
-  AllTasks: [],
-};
+//TODO: delete all array elements
+//TODO: use data to temporarily store, pass, and retrieve data
 
-function newTaskElementCreation(content, array, name = "All Tasks") {
+function newTaskElementCreation(content, name = "data") {
   const container = document.querySelector(".tasks");
   const newTaskButton = document.createElement("div");
   container.appendChild(newTaskButton);
@@ -23,57 +22,95 @@ function newTaskElementCreation(content, array, name = "All Tasks") {
   label.type = "checkbox";
   label.textContent = content;
 
-  checkbox.onclick = () => {
-    let useArray = JSON.parse(array);
-    console.log(useArray);
-    let index = useArray.indexOf(content);
-    console.log(index);
-    useArray.splice(index, 1);
-    console.log(useArray);
-    localStorage.setItem(name, JSON.stringify(useArray));
-    deleteTask(container, newTaskButton);
-  };
+  // if (!(content in data[name])) {
+  //   console.log("not inside");
+  // }
+  // data["data"].push(content);
+  // localStorage.setItem(name, JSON.stringify(data));
 }
 
-function deleteTask(parent, child) {
-  parent.removeChild(child);
+function runtimeStorage(data) {
+  this.data = data;
 }
+runtimeStorage.prototype.Keys = function () {
+  this.data.forEach((element) => {
+    console.log(element);
+  });
+};
 
-function newTask(array) {
-  // const HTMLNewTaskButton = document.querySelector(".newTask");
-  // HTMLNewTaskButton.onclick = () => {
-  //   const createTask = document.createElement("div");
-
-  // };
-  const addTaskButton = document.querySelector(".newTaskButton");
-  const content = document.querySelector(".content");
-
-  addTaskButton.onclick = () => {
-    newTaskElementCreation(content.value, array);
-    array.push(content.value);
-    console.log(array);
-    localStorage.setItem("All Tasks", JSON.stringify(array));
-    content.value = "";
-  };
-}
-
-function localStorageToTasks(name) {
-  if (!(localStorage.getItem(name) == null)) {
-    const allTasks = JSON.parse(localStorage.getItem(name));
-    allTasks.forEach((content) => {
-      newTaskElementCreation(content, localStorage.getItem(name));
-    });
-  } else {
-    localStorage.setItem(name, "[]");
+function localStorageToTasks(name = "data") {
+  const container = document.querySelector(".tasks");
+  container.innerHTML = "";
+  if (
+    localStorage.getItem(name) == null ||
+    JSON.parse(localStorage.getItem("data"))["data"].length == 0
+  ) {
+    //create data
+    // if key item not in storage, create one
+    localStorage.setItem(
+      name,
+      JSON.stringify(new runtimeStorage(["Your tasks will appear here"]))
+    );
   }
+  const dataToRead = JSON.parse(localStorage.getItem(name));
+  dataToRead["data"].forEach((e) => {
+    newTaskElementCreation(e);
+  });
+  return dataToRead;
 }
 
-// (() => {
-//   localStorageToTasks("All Tasks");
-//   console.log(localStorage.getItem("All Tasks"));
-//   const array = JSON.parse(localStorage.getItem("All Tasks"));
-//   newTask(array);
-//   // window.onclick = () => {
-//   //   console.log(array);
-//   // };
-// })();
+(() => {
+  // a function to read if there's already local data, and if not create an object there
+  // an object to receive data from local storage
+  const runtimeData = localStorageToTasks();
+  // runtimeData["data"].splice(1, 1);
+  // console.log(runtimeData["data"]);
+  // a function to add new category to ui and local storage & for deleting a category
+  // newCategoryCreation(runtimeData);
+
+  // function for the add task prompt to appear
+  // newTaskPrompt();
+
+  // a function to facilitate adding a task & to facilitate deleting a task
+  const add = document.querySelector(".newTaskButton");
+  const content = document.querySelector(".content");
+  add.onclick = () => {
+    newTaskElementCreation(content.value);
+    runtimeData["data"].push(content.value);
+
+    content.value = "";
+    localStorage.setItem("data", JSON.stringify(runtimeData));
+  };
+
+  window.onclick = () => {
+    deleteTask(runtimeData);
+  };
+  // const addTaskButton = document.querySelector(".newTaskButton");
+
+  // addTaskButton.onclick = () => {
+  //   newTaskElementCreation(content.value);
+  //   data.AllTasks.push(content.value);
+  //   console.log(data.AllTasks);
+  //   localStorage.setItem(name, JSON.stringify(data));
+  //   content.value = "";
+  // };
+})();
+
+function deleteTask(data, name = "data") {
+  let checkbox = document.querySelectorAll(".checkbox");
+  checkbox.forEach((e) => {
+    if (e.checked) {
+      const array = data["data"];
+      const taskContainer = e.parentElement;
+      const parent = taskContainer.parentElement;
+      parent.removeChild(taskContainer);
+
+      elementContent = e.nextElementSibling.textContent;
+      const index = array.indexOf(elementContent);
+      array.splice(index, 1);
+      localStorage.setItem(name, JSON.stringify(data));
+    }
+  });
+}
+
+//REFACTOR CODES!!!!
