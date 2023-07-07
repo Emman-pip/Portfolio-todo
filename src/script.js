@@ -59,43 +59,6 @@ function localStorageToTasks(name = "data") {
   return dataToRead;
 }
 
-(() => {
-  // a function to read if there's already local data, and if not create an object there
-  // an object to receive data from local storage
-  const runtimeData = localStorageToTasks();
-  // runtimeData["data"].splice(1, 1);
-  // console.log(runtimeData["data"]);
-  // a function to add new category to ui and local storage & for deleting a category
-  // newCategoryCreation(runtimeData);
-
-  // function for the add task prompt to appear
-  // newTaskPrompt();
-
-  // a function to facilitate adding a task & to facilitate deleting a task
-  const add = document.querySelector(".newTaskButton");
-  const content = document.querySelector(".content");
-  add.onclick = () => {
-    newTaskElementCreation(content.value);
-    runtimeData["data"].push(content.value);
-
-    content.value = "";
-    localStorage.setItem("data", JSON.stringify(runtimeData));
-  };
-
-  window.onclick = () => {
-    deleteTask(runtimeData);
-  };
-  // const addTaskButton = document.querySelector(".newTaskButton");
-
-  // addTaskButton.onclick = () => {
-  //   newTaskElementCreation(content.value);
-  //   data.AllTasks.push(content.value);
-  //   console.log(data.AllTasks);
-  //   localStorage.setItem(name, JSON.stringify(data));
-  //   content.value = "";
-  // };
-})();
-
 function deleteTask(data, name = "data") {
   let checkbox = document.querySelectorAll(".checkbox");
   checkbox.forEach((e) => {
@@ -113,4 +76,40 @@ function deleteTask(data, name = "data") {
   });
 }
 
+function newtaskPrompt() {
+  const newTaskButton = document.querySelector(".newTask");
+  const taskPrompt = document.querySelector(".createTask");
+  taskPrompt.classList.toggle("hide");
+  newTaskButton.onclick = () => {
+    taskPrompt.classList.toggle("hide");
+  };
+}
+
 //REFACTOR CODES!!!!
+(() => {
+  // a function to read if there's already local data, and if not create an object there
+  // an object to receive data from local storage
+  const runtimeData = localStorageToTasks();
+
+  // a function to add new category to ui and local storage & for deleting a category
+  // newCategoryCreation(runtimeData);
+
+  // function for the add task prompt to appear
+  newtaskPrompt();
+  // newTaskPrompt();
+
+  // a function to facilitate adding a task & to facilitate deleting a task
+  const add = document.querySelector(".newTaskButton");
+  const content = document.querySelector(".content");
+  add.onclick = () => {
+    newTaskElementCreation(content.value);
+    runtimeData["data"].push(content.value);
+
+    content.value = "";
+    localStorage.setItem("data", JSON.stringify(runtimeData));
+  };
+
+  window.onclick = () => {
+    deleteTask(runtimeData);
+  };
+})();
