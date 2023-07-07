@@ -47,14 +47,28 @@
           </div>
           <div class="row p-2 bg-dark">
             <div class="createTask container col-12">
-              <textarea
-                name="taskContent"
-                id="taskContent"
-                cols="30"
-                rows="10"
-                class="content form-control mb-2"
-              ></textarea>
-              <button class="newTaskButton btn btn-light float-end">Add</button>
+              <div class="row">
+                <textarea
+                  name="taskContent"
+                  id="taskContent"
+                  cols="30"
+                  rows="10"
+                  class="content form-control mb-2"
+                ></textarea>
+              </div>
+              <div class="row d-flex">
+                <button
+                  class="cancelButton btn btn-light btn-outline-dark float-start col-lg-6"
+                >
+                  cancel
+                </button>
+
+                <button
+                  class="newTaskButton btn btn-light btn-outline-dark float-end col-lg-6"
+                >
+                  Add
+                </button>
+              </div>
             </div>
           </div>
         </div>

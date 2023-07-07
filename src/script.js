@@ -78,9 +78,14 @@ function deleteTask(data, name = "data") {
 
 function newtaskPrompt() {
   const newTaskButton = document.querySelector(".newTask");
+  const cancelButton = document.querySelector(".cancelButton");
   const taskPrompt = document.querySelector(".createTask");
+
   taskPrompt.classList.toggle("hide");
   newTaskButton.onclick = () => {
+    taskPrompt.classList.toggle("hide");
+  };
+  cancelButton.onclick = () => {
     taskPrompt.classList.toggle("hide");
   };
 }
