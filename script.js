@@ -90,6 +90,10 @@ function newtaskPrompt() {
   };
 }
 
+function newCategoryCreation(data) {
+  //code to add new categories here
+}
+
 //REFACTOR CODES!!!!
 (() => {
   // a function to read if there's already local data, and if not create an object there
@@ -97,7 +101,7 @@ function newtaskPrompt() {
   const runtimeData = localStorageToTasks();
 
   // a function to add new category to ui and local storage & for deleting a category
-  // newCategoryCreation(runtimeData);
+  newCategoryCreation(runtimeData);
 
   // function for the add task prompt to appear
   newtaskPrompt();
@@ -111,10 +115,14 @@ function newtaskPrompt() {
     runtimeData["data"].push(content.value);
 
     content.value = "";
+    //if the tasks are supposed to be inside a category, then that task should be added there and the general tasks
     localStorage.setItem("data", JSON.stringify(runtimeData));
   };
 
   window.onclick = () => {
+    //if the task is deleted in the general tasks, it should be deleted in other categories.
     deleteTask(runtimeData);
   };
 })();
+
+// everytime the category changes, the source of data switches
