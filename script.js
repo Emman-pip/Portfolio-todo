@@ -90,8 +90,17 @@ function newtaskPrompt() {
   };
 }
 
-function newCategoryCreation(data) {
-  //code to add new categories here
+function newCategoryCreation(content) {
+  const categories = document.querySelector(".categories");
+
+  const catButton = document.createElement("button");
+  catButton.textContent = content;
+  catButton.classList.add("btn");
+  catButton.classList.add("btn-light");
+  catButton.classList.add("btn-outline-dark");
+  catButton.classList.add("w-100");
+
+  categories.appendChild(catButton);
 }
 
 //REFACTOR CODES!!!!
@@ -101,7 +110,14 @@ function newCategoryCreation(data) {
   const runtimeData = localStorageToTasks();
 
   // a function to add new category to ui and local storage & for deleting a category
-  newCategoryCreation(runtimeData);
+
+  const addCategory = document.querySelector(".newCategoryButton");
+  addCategory.onclick = () => {
+    const input = document.querySelector(".categoryInput");
+    const cancel = document.querySelector(".cancelCategoryButton");
+    newCategoryCreation(input.value);
+    input.value = "";
+  };
 
   // function for the add task prompt to appear
   newtaskPrompt();
