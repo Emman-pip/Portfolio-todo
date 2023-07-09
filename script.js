@@ -38,7 +38,7 @@ runtimeStorage.prototype.Keys = function () {
   });
 };
 
-function localStorageToTasks(name = "data") {
+function localStorageToScreen(name = "data") {
   const container = document.querySelector(".tasks");
   container.innerHTML = "";
   if (
@@ -103,20 +103,38 @@ function newCategoryCreation(content) {
   categories.appendChild(catButton);
 }
 
+function categoryToStorage(runtimeData, name) {
+  if (!(name == undefined)) {
+    console.log(runtimeData);
+    runtimeData[name] = [];
+    // runtimeData[name].push();
+    console.log(runtimeData);
+  }
+}
+
 //REFACTOR CODES!!!!
 (() => {
   // a function to read if there's already local data, and if not create an object there
   // an object to receive data from local storage
-  const runtimeData = localStorageToTasks();
+  const runtimeData = localStorageToScreen();
+  // runtimeData["categories"] = new runtimeStorage({ categ1: ["1"] });
 
   // a function to add new category to ui and local storage & for deleting a category
 
   const addCategory = document.querySelector(".newCategoryButton");
+  const categ1 = new Object();
+  runtimeData["categories"] = categ1;
+
   addCategory.onclick = () => {
     const input = document.querySelector(".categoryInput");
     const cancel = document.querySelector(".cancelCategoryButton");
     newCategoryCreation(input.value);
+
+    categoryToStorage(runtimeData["categories"], input.value);
+
     input.value = "";
+
+    localStorage.setItem("data", JSON.stringify(runtimeData));
   };
 
   // function for the add task prompt to appear
@@ -129,7 +147,6 @@ function newCategoryCreation(content) {
   add.onclick = () => {
     newTaskElementCreation(content.value);
     runtimeData["data"].push(content.value);
-
     content.value = "";
     //if the tasks are supposed to be inside a category, then that task should be added there and the general tasks
     localStorage.setItem("data", JSON.stringify(runtimeData));
