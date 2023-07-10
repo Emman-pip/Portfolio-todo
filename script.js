@@ -29,6 +29,14 @@ function newTaskElementCreation(content, name = "data") {
   // localStorage.setItem(name, JSON.stringify(data));
 }
 
+function taskToStorage(content) {
+  const data = JSON.parse(localStorage.getItem("data"));
+  if (!(content == undefined || content == null)) {
+    data["data"].push(content);
+  }
+  localStorage.setItem("data", JSON.stringify(data));
+}
+
 function runtimeStorage(data) {
   this.data = data;
 }
@@ -38,14 +46,13 @@ runtimeStorage.prototype.Keys = function () {
   });
 };
 
-function localStorageToScreen(name = "data") {
+function localStorageToTasks(name = "data") {
   const container = document.querySelector(".tasks");
   container.innerHTML = "";
   if (
     localStorage.getItem(name) == null ||
     JSON.parse(localStorage.getItem("data"))["data"].length == 0
   ) {
-    //create data
     // if key item not in storage, create one
     localStorage.setItem(
       name,
@@ -55,6 +62,23 @@ function localStorageToScreen(name = "data") {
   const dataToRead = JSON.parse(localStorage.getItem(name));
   dataToRead["data"].forEach((e) => {
     newTaskElementCreation(e);
+  });
+  return dataToRead;
+}
+function localStorageToCategories(array) {
+  const parent = document.querySelector(".categories");
+  parent.innerHTML = "";
+
+  if (JSON.parse(localStorage.getItem("data"))["categories"] === undefined) {
+    const data = JSON.parse(localStorage.getItem("data"));
+    data["categories"] = new Object();
+    localStorage.setItem("data", JSON.stringify(data));
+  }
+  const dataToRead = Object.keys(
+    JSON.parse(localStorage.getItem("data"))["categories"]
+  );
+  dataToRead.forEach((e) => {
+    newCategoryCreation(e);
   });
   return dataToRead;
 }
@@ -103,53 +127,61 @@ function newCategoryCreation(content) {
   categories.appendChild(catButton);
 }
 
-function categoryToStorage(runtimeData, name) {
+function categoryToStorage(name) {
+  const data = JSON.parse(localStorage.getItem("data"));
   if (!(name == undefined)) {
-    console.log(runtimeData);
-    runtimeData[name] = [];
-    // runtimeData[name].push();
-    console.log(runtimeData);
+    data["categories"][name] = [];
   }
+  localStorage.setItem("data", JSON.stringify(data));
 }
 
 //REFACTOR CODES!!!!
 (() => {
   // a function to read if there's already local data, and if not create an object there
   // an object to receive data from local storage
-  const runtimeData = localStorageToScreen();
-  // runtimeData["categories"] = new runtimeStorage({ categ1: ["1"] });
+  const runtimeData = localStorageToTasks();
+  localStorageToCategories();
 
   // a function to add new category to ui and local storage & for deleting a category
-
   const addCategory = document.querySelector(".newCategoryButton");
+  document.querySelector(".newCategory").onclick = () => {
+    categPromptContainer.classList.toggle("hide");
+  };
   const categ1 = new Object();
   runtimeData["categories"] = categ1;
 
   addCategory.onclick = () => {
     const input = document.querySelector(".categoryInput");
-    const cancel = document.querySelector(".cancelCategoryButton");
     newCategoryCreation(input.value);
-
-    categoryToStorage(runtimeData["categories"], input.value);
-
+    categoryToStorage(input.value);
     input.value = "";
+  };
 
-    localStorage.setItem("data", JSON.stringify(runtimeData));
+  const cancelCategAdd = document.querySelector(".cancelCategoryButton");
+  const categPromptContainer = document.querySelector(".createCategory");
+  categPromptContainer.classList.toggle("hide");
+  cancelCategAdd.onclick = () => {
+    categPromptContainer.classList.toggle("hide");
   };
 
   // function for the add task prompt to appear
   newtaskPrompt();
-  // newTaskPrompt();
 
   // a function to facilitate adding a task & to facilitate deleting a task
   const add = document.querySelector(".newTaskButton");
   const content = document.querySelector(".content");
   add.onclick = () => {
+    ////////////////////////////////////////////////////////////
     newTaskElementCreation(content.value);
-    runtimeData["data"].push(content.value);
+    taskToStorage(content.value);
+
     content.value = "";
-    //if the tasks are supposed to be inside a category, then that task should be added there and the general tasks
-    localStorage.setItem("data", JSON.stringify(runtimeData));
+
+    // runtimeData["data"].push(content.value);
+    // content.value = "";
+    // console.log(runtimeData);
+    // //if the tasks are supposed to be inside a category, then that task should be added there and the general tasks
+    // localStorage.setItem("data", JSON.stringify(runtimeData));
   };
 
   window.onclick = () => {
@@ -157,5 +189,3 @@ function categoryToStorage(runtimeData, name) {
     deleteTask(runtimeData);
   };
 })();
-
-// everytime the category changes, the source of data switches
