@@ -21,12 +21,6 @@ function newTaskElementCreation(content, name = "data") {
   label.classList.add("form-check-label");
   label.type = "checkbox";
   label.textContent = content;
-
-  // if (!(content in data[name])) {
-  //   console.log("not inside");
-  // }
-  // data["data"].push(content);
-  // localStorage.setItem(name, JSON.stringify(data));
 }
 
 function taskToStorage(content) {
@@ -68,7 +62,7 @@ function localStorageToTasks(name = "data") {
 function localStorageToCategories(array) {
   const parent = document.querySelector(".categories");
   parent.innerHTML = "";
-
+  const dropdown = document.querySelector(".dropdown");
   if (JSON.parse(localStorage.getItem("data"))["categories"] === undefined) {
     const data = JSON.parse(localStorage.getItem("data"));
     data["categories"] = new Object();
@@ -77,8 +71,11 @@ function localStorageToCategories(array) {
   const dataToRead = Object.keys(
     JSON.parse(localStorage.getItem("data"))["categories"]
   );
+  dropdown.innerHTML = "";
+  dropdown.innerHTML = `<option value="none">none</option>`;
   dataToRead.forEach((e) => {
     newCategoryCreation(e);
+    dropdown.innerHTML += `<option value="${e}">${e}</option>`;
   });
   return dataToRead;
 }
@@ -119,6 +116,7 @@ function newCategoryCreation(content) {
 
   const catButton = document.createElement("button");
   catButton.textContent = content;
+  catButton.classList.add("eachCateg");
   catButton.classList.add("btn");
   catButton.classList.add("btn-light");
   catButton.classList.add("btn-outline-dark");
@@ -126,6 +124,23 @@ function newCategoryCreation(content) {
 
   categories.appendChild(catButton);
 }
+//TODO
+function categoryAppend() {}
+
+//TODO
+function categoryChange() {
+  const eachCateg = document.querySelectorAll(".eachCateg");
+  eachCateg.forEach((e) => {
+    e.onclick = () => {
+      console.log(e.textContent);
+    };
+  });
+}
+
+//TODO: includes category and contents of the said category
+function categoryDelete() {}
+
+//TODO: REDO HOW A TASK IS DELETED, ONCE DELETED IN all tasks, must be deleted in specific category
 
 function categoryToStorage(name) {
   const data = JSON.parse(localStorage.getItem("data"));
@@ -154,6 +169,7 @@ function categoryToStorage(name) {
     const input = document.querySelector(".categoryInput");
     newCategoryCreation(input.value);
     categoryToStorage(input.value);
+    localStorageToCategories();
     input.value = "";
   };
 
@@ -184,8 +200,10 @@ function categoryToStorage(name) {
     // localStorage.setItem("data", JSON.stringify(runtimeData));
   };
 
+  categoryChange();
   window.onclick = () => {
     //if the task is deleted in the general tasks, it should be deleted in other categories.
     deleteTask(runtimeData);
+    categoryChange();
   };
 })();
