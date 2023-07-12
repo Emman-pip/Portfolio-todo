@@ -42,7 +42,7 @@ runtimeStorage.prototype.Keys = function () {
 
 function localStorageToTasks(name = "data") {
   const container = document.querySelector(".tasks");
-  container.innerHTML = "";
+  container.innerHTML = `<div class="lead">All Tasks</div>`;
   if (
     localStorage.getItem(name) == null ||
     JSON.parse(localStorage.getItem("data"))["data"].length == 0
@@ -136,17 +136,26 @@ function categoryAppend(category, content) {
 function categoryChange() {
   const eachCateg = document.querySelectorAll(".eachCateg");
   const tasks = document.querySelector(".tasks");
-  const data = JSON.parse(localStorage.getItem("data"))["categories"];
+  const data = JSON.parse(localStorage.getItem("data"));
+  const general = document.querySelector(".General");
+
   eachCateg.forEach((e) => {
     e.onclick = () => {
       tasks.innerHTML = "";
       tasks.innerHTML += `<div class="lead">${e.textContent}</div>`;
-      console.log(e.textContent);
-      data[`${e.textContent}`].forEach((content) => {
+      data["categories"][`${e.textContent}`].forEach((content) => {
         newTaskElementCreation(content);
       });
     };
   });
+
+  general.onclick = () => {
+    tasks.innerHTML = "";
+    tasks.innerHTML += `<div class="lead">All Tasks</div>`;
+    data["data"].forEach((content) => {
+      newTaskElementCreation(content);
+    });
+  };
 }
 
 //TODO: includes category and contents of the said category
