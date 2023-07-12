@@ -1,6 +1,3 @@
-//TODO: delete all array elements
-//TODO: use data to temporarily store, pass, and retrieve data
-
 function newTaskElementCreation(content, name = "data") {
   const container = document.querySelector(".tasks");
   const newTaskButton = document.createElement("div");
@@ -80,7 +77,8 @@ function localStorageToCategories(array) {
   return dataToRead;
 }
 //TODO:fix this shit
-function deleteTask(data, name = "data") {
+function deleteTask(name = "data") {
+  const data = JSON.parse(localStorage.getItem(name));
   let checkbox = document.querySelectorAll(".checkbox");
   checkbox.forEach((e) => {
     if (e.checked) {
@@ -225,7 +223,7 @@ function categoryToStorage(name) {
   categoryChange();
   window.onclick = () => {
     //if the task is deleted in the general tasks, it should be deleted in other categories.
-    deleteTask(runtimeData);
+    deleteTask();
     categoryChange();
   };
 })();
