@@ -130,7 +130,6 @@ function newCategoryCreation(content) {
 
   categories.appendChild(catButton);
 }
-//TODO
 function categoryAppend(category, content) {
   const data = JSON.parse(localStorage.getItem("data"));
   if (!(category == "none")) {
@@ -167,8 +166,6 @@ function categoryChange() {
 //TODO: includes category and contents of the said category
 function categoryDelete() {}
 
-//TODO: REDO HOW A TASK IS DELETED, ONCE DELETED IN all tasks, must be deleted in specific category
-
 function categoryToStorage(name) {
   const data = JSON.parse(localStorage.getItem("data"));
   if (!(name == undefined)) {
@@ -179,12 +176,9 @@ function categoryToStorage(name) {
 
 //REFACTOR CODES!!!!
 (() => {
-  // a function to read if there's already local data, and if not create an object there
-  // an object to receive data from local storage
   const runtimeData = localStorageToTasks();
   localStorageToCategories();
 
-  // a function to add new category to ui and local storage & for deleting a category
   const addCategory = document.querySelector(".newCategoryButton");
   document.querySelector(".newCategory").onclick = () => {
     categPromptContainer.classList.toggle("hide");
@@ -207,25 +201,16 @@ function categoryToStorage(name) {
     categPromptContainer.classList.toggle("hide");
   };
 
-  // function for the add task prompt to appear
   newtaskPrompt();
 
-  // a function to facilitate adding a task & to facilitate deleting a task
   const add = document.querySelector(".newTaskButton");
   const content = document.querySelector(".content");
   add.onclick = () => {
     const category = document.querySelector(".dropdown");
-    ////////////////////////////////////////////////////////////
     newTaskElementCreation(content.value);
     taskToStorage(content.value);
     categoryAppend(category.value, content.value);
     content.value = "";
-
-    // runtimeData["data"].push(content.value);
-    // content.value = "";
-    // console.log(runtimeData);
-    // //if the tasks are supposed to be inside a category, then that task should be added there and the general tasks
-    // localStorage.setItem("data", JSON.stringify(runtimeData));
   };
 
   categoryChange();
