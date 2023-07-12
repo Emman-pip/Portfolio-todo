@@ -79,7 +79,7 @@ function localStorageToCategories(array) {
   });
   return dataToRead;
 }
-
+//TODO:fix this shit
 function deleteTask(data, name = "data") {
   let checkbox = document.querySelectorAll(".checkbox");
   checkbox.forEach((e) => {
@@ -125,9 +125,14 @@ function newCategoryCreation(content) {
   categories.appendChild(catButton);
 }
 //TODO
-function categoryAppend() {}
+function categoryAppend(category, content) {
+  const data = JSON.parse(localStorage.getItem("data"));
+  if (!(category == "none")) {
+    data["categories"][category].push(content);
+  }
+  localStorage.setItem("data", JSON.stringify(data));
+}
 
-//TODO
 function categoryChange() {
   const eachCateg = document.querySelectorAll(".eachCateg");
   const tasks = document.querySelector(".tasks");
@@ -194,10 +199,11 @@ function categoryToStorage(name) {
   const add = document.querySelector(".newTaskButton");
   const content = document.querySelector(".content");
   add.onclick = () => {
+    const category = document.querySelector(".dropdown");
     ////////////////////////////////////////////////////////////
     newTaskElementCreation(content.value);
     taskToStorage(content.value);
-
+    categoryAppend(category.value, content.value);
     content.value = "";
 
     // runtimeData["data"].push(content.value);
