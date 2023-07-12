@@ -39,7 +39,7 @@ runtimeStorage.prototype.Keys = function () {
 
 function localStorageToTasks(name = "data") {
   const container = document.querySelector(".tasks");
-  container.innerHTML = `<div class="lead">All Tasks</div>`;
+  container.innerHTML = `<div class="categTitle lead">All Tasks</div>`;
   if (
     localStorage.getItem(name) == null ||
     JSON.parse(localStorage.getItem("data"))["data"].length == 0
@@ -76,20 +76,28 @@ function localStorageToCategories(array) {
   });
   return dataToRead;
 }
-//TODO:fix this shit
+
 function deleteTask(name = "data") {
   const data = JSON.parse(localStorage.getItem(name));
   let checkbox = document.querySelectorAll(".checkbox");
   checkbox.forEach((e) => {
     if (e.checked) {
-      const array = data["data"];
+      const array = data[name];
       const taskContainer = e.parentElement;
       const parent = taskContainer.parentElement;
       parent.removeChild(taskContainer);
 
-      elementContent = e.nextElementSibling.textContent;
+      const elementContent = e.nextElementSibling.textContent;
       const index = array.indexOf(elementContent);
       array.splice(index, 1);
+
+      const keys = Object.keys(data["categories"]);
+      keys.forEach((e) => {
+        if (data["categories"][e].includes(elementContent)) {
+          const indexInCateg = data["categories"][e].indexOf(elementContent);
+          data["categories"][e].splice(indexInCateg, 1);
+        }
+      });
       localStorage.setItem(name, JSON.stringify(data));
     }
   });
@@ -140,7 +148,7 @@ function categoryChange() {
   eachCateg.forEach((e) => {
     e.onclick = () => {
       tasks.innerHTML = "";
-      tasks.innerHTML += `<div class="lead">${e.textContent}</div>`;
+      tasks.innerHTML += `<div class="categTitle lead">${e.textContent}</div>`;
       data["categories"][`${e.textContent}`].forEach((content) => {
         newTaskElementCreation(content);
       });
@@ -149,7 +157,7 @@ function categoryChange() {
 
   general.onclick = () => {
     tasks.innerHTML = "";
-    tasks.innerHTML += `<div class="lead">All Tasks</div>`;
+    tasks.innerHTML += `<div class="categTitle lead">All Tasks</div>`;
     data["data"].forEach((content) => {
       newTaskElementCreation(content);
     });
@@ -222,8 +230,11 @@ function categoryToStorage(name) {
 
   categoryChange();
   window.onclick = () => {
-    //if the task is deleted in the general tasks, it should be deleted in other categories.
+    let categTitle = document.querySelector(".categTitle ");
     deleteTask();
+    if (!(categTitle.textContent == "All Tasks")) {
+      deleteTask(categTitle.textContent);
+    }
     categoryChange();
   };
 })();
