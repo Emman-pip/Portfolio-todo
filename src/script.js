@@ -130,9 +130,16 @@ function categoryAppend() {}
 //TODO
 function categoryChange() {
   const eachCateg = document.querySelectorAll(".eachCateg");
+  const tasks = document.querySelector(".tasks");
+  const data = JSON.parse(localStorage.getItem("data"))["categories"];
   eachCateg.forEach((e) => {
     e.onclick = () => {
+      tasks.innerHTML = "";
+      tasks.innerHTML += `<div class="lead">${e.textContent}</div>`;
       console.log(e.textContent);
+      data[`${e.textContent}`].forEach((content) => {
+        newTaskElementCreation(content);
+      });
     };
   });
 }
