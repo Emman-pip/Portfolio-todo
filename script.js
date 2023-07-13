@@ -122,26 +122,29 @@ function newCategoryCreation(content) {
   const parent = document.createElement("div");
   parent.classList.add("row");
   parent.classList.add("input-group");
+  parent.classList.add("m-1");
   parent.classList.add("g-0");
 
   const catButton = document.createElement("button");
   catButton.classList.add("eachCateg");
-  // catButton.classList.add("text-wrap");
+  catButton.classList.add("text-truncate");
   catButton.classList.add("col");
   catButton.classList.add("btn");
   catButton.classList.add("btn-light");
   catButton.classList.add("btn-outline-dark");
-  catButton.classList.add("w-100");
+  // catButton.classList.add("w-100");
+  // catButton.classList.add("rounded-top");
   catButton.classList.add("input-text");
 
   catButton.textContent = content;
   parent.appendChild(catButton);
   categories.appendChild(parent);
   const deleteButton = document.createElement("button");
+  deleteButton.classList.add("deleteCategButton");
   deleteButton.textContent = "❌";
+  deleteButton.classList.add("border-start-0");
   deleteButton.classList.add("col-3");
   deleteButton.classList.add("input-text");
-
   deleteButton.classList.add("text-center");
   deleteButton.classList.add("btn");
   deleteButton.classList.add("btn-light");
