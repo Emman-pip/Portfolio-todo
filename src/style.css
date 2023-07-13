@@ -7,3 +7,7 @@
 .hide {
   display: none;
 }
+
+.eachCateg {
+  word-wrap: break-word;
+}

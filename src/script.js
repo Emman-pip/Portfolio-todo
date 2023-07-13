@@ -119,17 +119,60 @@ function newtaskPrompt() {
 
 function newCategoryCreation(content) {
   const categories = document.querySelector(".categories");
+  const parent = document.createElement("div");
+  parent.classList.add("row");
+  parent.classList.add("input-group");
+  parent.classList.add("g-0");
 
   const catButton = document.createElement("button");
-  catButton.textContent = content;
   catButton.classList.add("eachCateg");
+  // catButton.classList.add("text-wrap");
+  catButton.classList.add("col");
   catButton.classList.add("btn");
   catButton.classList.add("btn-light");
   catButton.classList.add("btn-outline-dark");
   catButton.classList.add("w-100");
+  catButton.classList.add("input-text");
 
-  categories.appendChild(catButton);
+  catButton.textContent = content;
+  parent.appendChild(catButton);
+  categories.appendChild(parent);
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "❌";
+  deleteButton.classList.add("col-3");
+  deleteButton.classList.add("input-text");
+
+  deleteButton.classList.add("text-center");
+  deleteButton.classList.add("btn");
+  deleteButton.classList.add("btn-light");
+  deleteButton.classList.add("btn-outline-dark");
+
+  parent.appendChild(deleteButton);
+  const mainContainer = parent.parentElement;
+
+  deleteButton.onclick = () => {
+    categoryDelete(deleteButton, parent, content);
+    localStorageToTasks();
+    localStorageToCategories();
+  };
 }
+
+//TODO: includes category and contents of the said category
+function categoryDelete(deleteButton, parent, content) {
+  deleteButton.onclick = () => {
+    mainContainer.removeChild(parent);
+  };
+
+  const data = JSON.parse(localStorage.getItem("data"));
+  console.log(data["categories"]);
+  data["categories"][content].forEach((e) => {
+    let index = data["data"].indexOf(e);
+    data["data"].splice(index, 1);
+  });
+  delete data["categories"][content];
+  localStorage.setItem("data", JSON.stringify(data));
+}
+
 function categoryAppend(category, content) {
   const data = JSON.parse(localStorage.getItem("data"));
   if (!(category == "none")) {
@@ -163,9 +206,6 @@ function categoryChange() {
   };
 }
 
-//TODO: includes category and contents of the said category
-function categoryDelete() {}
-
 function categoryToStorage(name) {
   const data = JSON.parse(localStorage.getItem("data"));
   if (!(name == undefined)) {
@@ -188,7 +228,6 @@ function categoryToStorage(name) {
 
   addCategory.onclick = () => {
     const input = document.querySelector(".categoryInput");
-    newCategoryCreation(input.value);
     categoryToStorage(input.value);
     localStorageToCategories();
     input.value = "";
