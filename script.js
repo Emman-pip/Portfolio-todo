@@ -2,6 +2,9 @@ function newTaskElementCreation(content, name = "data") {
   const container = document.querySelector(".tasks");
   const newTaskButton = document.createElement("div");
   container.appendChild(newTaskButton);
+  newTaskButton.classList.add("task");
+  newTaskButton.classList.add("mb-2");
+  newTaskButton.classList.add("p-1");
   newTaskButton.classList.add("d-flex");
   newTaskButton.classList.add("align-items-center");
   newTaskButton.classList.add("gap-2");
@@ -15,6 +18,7 @@ function newTaskElementCreation(content, name = "data") {
 
   const label = document.createElement("label");
   newTaskButton.appendChild(label);
+  label.classList.add("text-truncate");
   label.classList.add("form-check-label");
   label.type = "checkbox";
   label.textContent = content;

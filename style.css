@@ -1,3 +1,10 @@
+* {
+  --main-color: #f5f5f5;
+  --secondary-color: #f2ead3;
+  --tertiary-color: #dfd7bf;
+  --accent-color: #3f2305;
+}
+
 .checkbox {
   border-radius: 100px;
   width: 2rem;
@@ -6,4 +13,31 @@
 
 .hide {
   display: none;
+}
+
+nav {
+  background-color: var(--secondary-color);
+}
+
+main {
+  background-color: var(--main-color);
+}
+
+.buttonsToClick {
+  background-color: var(--tertiary-color);
+}
+
+.newTask,
+.newCategory,
+.General {
+  background-color: var(--accent-color);
+}
+
+.tasks {
+  background-color: var(--secondary-color);
+}
+
+.task {
+  background-color: var(--main-color);
+  border-radius: 2rem;
 }
