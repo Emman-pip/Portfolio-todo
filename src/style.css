@@ -7,8 +7,8 @@
 
 .checkbox {
   border-radius: 100px;
-  width: 2rem;
-  height: 2rem;
+  min-width: 2rem;
+  min-height: 2rem;
 }
 
 .hide {
@@ -20,7 +20,7 @@ nav {
 }
 
 main {
-  background-color: var(--main-color);
+  background-color: var(--tertiary-color);
 }
 
 .buttonsToClick {
@@ -40,4 +40,17 @@ main {
 .task {
   background-color: var(--main-color);
   border-radius: 2rem;
+}
+
+.eachCategContainer {
+  background-color: var(--main-color);
+  transition: background-color 100ms;
+}
+
+.eachCategContainer:hover {
+  background-color: #ababab;
+}
+
+.underline {
+  display: relative;
 }

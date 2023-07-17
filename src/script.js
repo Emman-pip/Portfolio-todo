@@ -16,8 +16,9 @@ function newTaskElementCreation(content, name = "data") {
   checkbox.classList.add("form-check-input");
   checkbox.classList.add("rounded-circle");
 
-  const label = document.createElement("label");
+  const label = document.createElement("div");
   newTaskButton.appendChild(label);
+  label.classList.add("underline");
   label.classList.add("text-truncate");
   label.classList.add("form-check-label");
   label.type = "checkbox";
@@ -124,7 +125,9 @@ function newtaskPrompt() {
 function newCategoryCreation(content) {
   const categories = document.querySelector(".categories");
   const parent = document.createElement("div");
+  parent.classList.add("eachCategContainer");
   parent.classList.add("row");
+  parent.classList.add("rounded-3");
   parent.classList.add("input-group");
   parent.classList.add("m-1");
   parent.classList.add("g-0");
@@ -134,8 +137,8 @@ function newCategoryCreation(content) {
   catButton.classList.add("text-truncate");
   catButton.classList.add("col");
   catButton.classList.add("btn");
-  catButton.classList.add("btn-light");
-  catButton.classList.add("btn-outline-dark");
+  // catButton.classList.add("btn-light");
+  // catButton.classList.add("btn-outline-dark");
   // catButton.classList.add("w-100");
   // catButton.classList.add("rounded-top");
   catButton.classList.add("input-text");
@@ -151,8 +154,8 @@ function newCategoryCreation(content) {
   deleteButton.classList.add("input-text");
   deleteButton.classList.add("text-center");
   deleteButton.classList.add("btn");
-  deleteButton.classList.add("btn-light");
-  deleteButton.classList.add("btn-outline-dark");
+  // deleteButton.classList.add("btn-light");
+  // deleteButton.classList.add("btn-outline-dark");
 
   parent.appendChild(deleteButton);
   const mainContainer = parent.parentElement;
