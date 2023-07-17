@@ -114,7 +114,7 @@ function newtaskPrompt() {
   const newTaskButton = document.querySelector(".newTask");
   const cancelButton = document.querySelector(".cancelButton");
   const taskPrompt = document.querySelector(".createTask");
-
+  const categoryPrompt = document.querySelector(".createCategory");
   taskPrompt.classList.toggle("hide");
   newTaskButton.onclick = () => {
     taskPrompt.classList.toggle("hide");
@@ -122,6 +122,7 @@ function newtaskPrompt() {
   cancelButton.onclick = () => {
     taskPrompt.classList.toggle("hide");
   };
+  console.log();
 }
 
 function newCategoryCreation(content) {
@@ -231,6 +232,7 @@ function categoryToStorage(name) {
   const runtimeData = localStorageToTasks();
   localStorageToCategories();
 
+  const add = document.querySelector(".newTaskButton");
   const addCategory = document.querySelector(".newCategoryButton");
   document.querySelector(".newCategory").onclick = () => {
     categPromptContainer.classList.toggle("hide");
@@ -254,7 +256,6 @@ function categoryToStorage(name) {
 
   newtaskPrompt();
 
-  const add = document.querySelector(".newTaskButton");
   const content = document.querySelector(".content");
   add.onclick = () => {
     const category = document.querySelector(".dropdown");
