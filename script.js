@@ -1,3 +1,5 @@
+console.log(document.querySelector("#Options").parentElement);
+
 function newTaskElementCreation(content, name = "data") {
   const container = document.querySelector(".tasks");
   const newTaskButton = document.createElement("div");

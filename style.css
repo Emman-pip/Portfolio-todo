@@ -28,9 +28,16 @@ main {
 }
 
 .newTask,
-.newCategory,
-.General {
+.newCategory {
   background-color: var(--accent-color);
+}
+
+.General {
+  background-color: var(--secondary-color);
+}
+
+.General:hover {
+  background-color: #c6bfaa;
 }
 
 .tasks {
@@ -69,4 +76,9 @@ main {
 .underline:hover::after {
   /* transform: translateX(1); */
   transform: scaleX(1);
+}
+
+.buttonsToClick {
+  background-color: var(--main-color);
+  min-height: 100%;
 }
