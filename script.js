@@ -203,7 +203,7 @@ function categoryChange() {
   eachCateg.forEach((e) => {
     e.onclick = () => {
       tasks.innerHTML = "";
-      tasks.innerHTML += `<div class="categTitle lead">${e.textContent}</div>`;
+      tasks.innerHTML += `<div class="categTitle text-truncate lead">${e.textContent}</div>`;
       data["categories"][`${e.textContent}`].forEach((content) => {
         newTaskElementCreation(content);
       });
@@ -212,7 +212,7 @@ function categoryChange() {
 
   general.onclick = () => {
     tasks.innerHTML = "";
-    tasks.innerHTML += `<div class="categTitle lead">All Tasks</div>`;
+    tasks.innerHTML += `<div class="categTitle text-truncate lead">All Tasks</div>`;
     data["data"].forEach((content) => {
       newTaskElementCreation(content);
     });
