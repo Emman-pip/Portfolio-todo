@@ -104,3 +104,12 @@ main {
 .Height {
   min-height: 100vh;
 }
+
+.circle {
+  min-width: 1rem;
+  max-width: 1rem;
+  min-height: 1rem;
+  max-height: 1rem;
+  background-color: var(--accent-color);
+  border-radius: 1rem;
+}

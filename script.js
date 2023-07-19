@@ -1,5 +1,3 @@
-console.log(document.querySelector("#Options").parentElement);
-
 function newTaskElementCreation(content, name = "data") {
   const container = document.querySelector(".tasks");
   const newTaskButton = document.createElement("div");
@@ -38,11 +36,6 @@ function taskToStorage(content) {
 function runtimeStorage(data) {
   this.data = data;
 }
-runtimeStorage.prototype.Keys = function () {
-  this.data.forEach((element) => {
-    console.log(element);
-  });
-};
 
 function localStorageToTasks(name = "data") {
   const container = document.querySelector(".tasks");
@@ -122,7 +115,6 @@ function newtaskPrompt() {
   cancelButton.onclick = () => {
     taskPrompt.classList.toggle("hide");
   };
-  console.log();
 }
 
 function newCategoryCreation(content) {
@@ -177,7 +169,6 @@ function categoryDelete(deleteButton, parent, content) {
   };
 
   const data = JSON.parse(localStorage.getItem("data"));
-  console.log(data["categories"]);
   data["categories"][content].forEach((e) => {
     let index = data["data"].indexOf(e);
     data["data"].splice(index, 1);
@@ -274,4 +265,13 @@ function categoryToStorage(name) {
     }
     categoryChange();
   };
+})();
+
+(() => {
+  if (localStorage.getItem("name") == undefined) {
+    const username = prompt("What's your name?");
+    localStorage.setItem("name", username);
+  }
+  const name = document.querySelector(".name");
+  name.textContent += localStorage.getItem("name");
 })();
