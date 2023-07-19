@@ -82,3 +82,25 @@ main {
   background-color: var(--main-color);
   min-height: 100%;
 }
+
+.categContainer {
+  background-color: #ababab5c;
+  backdrop-filter: blur(3px);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.inputBox {
+  /* background-color: var(--accent-color); */
+}
+
+.Height {
+  min-height: 100vh;
+}

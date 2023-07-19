@@ -52,23 +52,8 @@
     </nav>
 
     <main class="container-fluid g-0">
-      <!-- <div
-          navbar navbar-expand-md
-          class="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#Options"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span>+</span>
-        </div> -->
-      <!--
-            navbar-collapse
-            collapse
-            -->
-      <div class="row vh-100 g-0">
-        <div class="buttonsToClick col-3 p-4" id="Options">
+      <div class="Height row g-0">
+        <div class="buttonsToClick col-sm-3 p-4" id="Options">
           <div class="row">
             <!-- <button class="General btn btn-outline-light mb-1 col-12">
               General
@@ -82,56 +67,67 @@
           </div>
           <div class="row">
             <div class="createTask p-2 container col-12">
-              <div class="row">
-                <label for="dropdown" class="text-light g-0">Category:</label>
-                <select
-                  name="dropdown"
-                  id="dropdown"
-                  class="dropdown form-control"
-                >
-                  <option value="none">none</option>
-                </select>
-              </div>
-              <div class="row">
-                <textarea
-                  name="taskContent"
-                  id="taskContent"
-                  cols="30"
-                  rows="10"
-                  class="content form-control mb-2"
-                ></textarea>
-              </div>
-              <div class="row d-flex">
-                <button
-                  class="cancelButton btn btn-light btn-outline-dark float-start col-lg-6"
-                >
-                  cancel
-                </button>
+              <div class="categContainer">
+                <div class="inputBox">
+                  <div class="row">
+                    <label for="dropdown" class="text-light g-0"
+                      >Category:</label
+                    >
+                    <select
+                      name="dropdown"
+                      id="dropdown"
+                      class="dropdown form-control"
+                    >
+                      <option value="none">none</option>
+                    </select>
+                  </div>
+                  <div class="row">
+                    <textarea
+                      name="taskContent"
+                      id="taskContent"
+                      cols="30"
+                      rows="1"
+                      class="content form-control mb-2"
+                    ></textarea>
+                  </div>
+                  <div class="row d-flex">
+                    <button
+                      class="cancelButton btn btn-light btn-outline-dark float-start col-lg-6"
+                    >
+                      cancel
+                    </button>
 
-                <button
-                  class="newTaskButton btn btn-light btn-outline-dark float-end col-lg-6"
-                >
-                  Add
-                </button>
+                    <button
+                      class="newTaskButton btn btn-light btn-outline-dark float-end col-lg-6"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
+            <div class="createCategory p-2 container">
+              <!-- col-12 -->
+              <div class="categContainer">
+                <div class="inputBox">
+                  <div class="lead">Category Name:</div>
+                  <div class="row">
+                    <input type="text" class="categoryInput form-control" />
+                  </div>
+                  <div class="row d-flex">
+                    <button
+                      class="cancelCategoryButton btn btn-light btn-outline-dark float-start col-lg-6"
+                    >
+                      cancel
+                    </button>
 
-            <div class="createCategory p-2 container col-12">
-              <div class="row">
-                <input type="text" class="categoryInput form-control" />
-              </div>
-              <div class="row d-flex">
-                <button
-                  class="cancelCategoryButton btn btn-light btn-outline-dark float-start col-lg-6"
-                >
-                  cancel
-                </button>
-
-                <button
-                  class="newCategoryButton btn btn-light btn-outline-dark float-end col-lg-6"
-                >
-                  Add
-                </button>
+                    <button
+                      class="newCategoryButton btn btn-light btn-outline-dark float-end col-lg-6"
+                    >
+                      Add
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -140,7 +136,7 @@
             <div class="categories px-1"></div>
           </div>
         </div>
-        <div class="col-9 p-2">
+        <div class="col-sm-9 p-2 order-first">
           <div class="tasks container py-2 px-2 rounded-3">
             <div class="d-flex align-items-center gap-2">
               <input
