@@ -18,10 +18,11 @@
     ></script>
     <script defer src="./script.js"></script>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" href="../media/me.png" />
   </head>
   <body>
     <nav class="navbar navbar-light navbar-expand-lg">
-      <div class="container-fluid">
+      <div class="container-fluid d-flex">
         <div class="navbar-brand">Todo</div>
         <div
           class="navbar-toggler"
@@ -35,18 +36,19 @@
           <span class="navbar-toggler-icon"></span>
         </div>
         <ul
-          class="navbar-nav navbar-collapse collapse"
+          class="navbar-nav navbar-collapse collapse justify-content-end"
           id="navbarSupportedContent"
         >
-          <li class="nav-item">
-            <a href="#" class="nav-link">Home</a>
+          <li class="nav-item d-flex align-items-center">
+            <div class="circle"></div>
+            <a href="#" class="name nav-link">Welcome </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">To do</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">About</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
